@@ -1,0 +1,88 @@
+# =====================================================================
+# Git Ignore 文件 — 手写数字识别项目
+# =====================================================================
+# 本文件告诉 Git 哪些文件/目录不纳入版本控制。
+# 已经在远程仓库的文件需要额外用 git rm --cached 移除追踪。
+
+# ====================== IDE 配置文件 ======================
+# PyCharm / IntelliJ IDEA
+.idea/
+*.iml
+*.iws
+
+# VS Code
+.vscode/
+*.code-workspace
+
+# 其他编辑器
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# ====================== Python 运行时文件 ======================
+# 字节码缓存（自动生成，体积大且无意义）
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# 虚拟环境
+venv/
+env/
+.venv/
+.env/
+*.egg-info/
+dist/
+build/
+
+# Jupyter Notebook 检查点
+.ipynb_checkpoints/
+
+# ====================== 训练产出（大文件 + 可复现） ======================
+# 模型权重文件（几MB~几百MB，可通过代码重新训练生成）
+*.pt
+*.pth
+*.pb
+*.h5
+*.hdf5
+*.model
+*.pkl
+*.joblib
+
+# 训练日志
+*.log
+logs/
+runs/
+lightning_logs/
+
+# ====================== 数据集 & 模型文件目录 ======================
+# data/ 目录下的所有文件都不上传（数据集 + 预训练权重 + 模型样本）
+#   76MB train.csv        — 太大，不属于源码
+#   nn_example.pt         — 模型权重，可通过代码重新训练
+#   nn_sample             — 模型样本文件
+# 如果需要版本控制数据集，建议用 DVC (Data Version Control) 代替 Git
+data/*
+# 保留 data 目录结构（克隆项目后自动创建空目录）
+!data/.gitkeep
+
+# ====================== 其他 ======================
+# 临时文件
+tmp/
+temp/
+*.tmp
+
+# 覆盖率报告
+htmlcov/
+.coverage
+.coverage.*
+coverage.xml
+
+# 环境变量（含敏感信息如 API Key）
+.env
+.env.local
+.env.*.local
+
+# 操作系统生成文件
+Desktop.ini
