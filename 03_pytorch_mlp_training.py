@@ -298,7 +298,29 @@ for epoch in range(epochs):
         f'验证准确率: {val_acc:.4f}'
     )
 
+# ====================== 8. 保存训练好的模型 ======================
+# torch.save() 将模型的 state_dict（所有层的 W 和 b）保存到磁盘
+# 保存后可以用 02_pytorch_mlp_inference.py 的方式加载复用
+# 文件扩展名通常用 .pt 或 .pth（PyTorch 约定）
+torch.save(model.state_dict(), "03_mlp_digital.pt")
+print("模型已保存到 03_mlp_digital.pt")
+
+# ====================== 9. 查看训练后各层权重的统计信息 ======================
+# 通过检查权重的均值、标准差、最值，可以判断训练是否正常：
+#   - 均值接近 0 且标准差适中 → 正常 ✅
+#   - 权重全为 0 或全相同 → 梯度消失/未训练 ⚠️
+#   - 权重数值极大（如 >100）→ 梯度爆炸，需要调小 lr 或加梯度裁剪 ⚠️
+#   - 标准差极小 → 权重萎缩，网络退化，可能需要调整学习率
+print("\n==================== 各层权重统计 ====================")
+for name, param in model.named_parameters():
+    if 'weight' in name:
+        print(f"{name:15s} | 均值: {param.mean():+.6f} | "
+              f"标准差: {param.std():.6f} | "
+              f"最小值: {param.min():+.6f} | "
+              f"最大值: {param.max():+.6f}")
+print("========================================================\n")
+
 # ====================== 训练完成 ======================
 # 训练结束后，model 中保存的是最后一轮（第 50 轮）的参数
 # 如果需要保存最佳模型（而非最后一轮的模型），应该在验证准确率最高时
-# 使用 torch.save(model.state_dict(), "best_model.pt") 保存检查点
+# 用 torch.save(model.state_dict(), "03_mlp_best.pt") 保存检查点
