@@ -3,6 +3,8 @@
 > 一个循序渐进的手写数字识别教学项目，覆盖 Scikit-learn 经典机器学习到 PyTorch 深度学习，
 > 从最简单的逻辑回归到 18 层残差卷积网络，适合课堂教学和自学。
 
+🔗 **GitHub 仓库**：[https://github.com/EdmendZ/digitRecognition](https://github.com/EdmendZ/digitRecognition)
+
 ---
 
 ## 📁 项目结构
